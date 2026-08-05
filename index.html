@@ -2,26 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Accessible Audio Piano</title>
+  <title>Accessible Piano - Song Edition</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       background-color: #121212;
       color: #ffffff;
-      padding-top: 50px;
+      padding: 20px;
     }
     .box {
       border: 2px solid #ffffff;
-      display: inline-block;
-      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 25px;
       border-radius: 10px;
     }
     button {
       font-size: 18px;
-      padding: 10px 20px;
-      margin-bottom: 20px;
+      padding: 12px 24px;
+      margin: 15px 0;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
+    }
+    .song-card {
+      background-color: #1e1e1e;
+      border: 1px solid #444;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: left;
+      border-radius: 8px;
+    }
+    .keys {
+      color: #FFD700;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
   </style>
 </head>
@@ -29,27 +47,52 @@
 
   <main class="box">
     <h1>Accessible Audio Piano</h1>
-    <p>Click "Start Audio", then press <strong>A, S, D, F, G</strong> to play.</p>
+    <p>Press the button below to enable audio, then use your computer keyboard to play!</p>
     
-    <button id="startBtn">1. Click Here First to Start Audio</button>
+    <button id="startBtn">Click Here to Enable Audio</button>
     
-    <div id="status" aria-live="polite" style="font-size: 22px; color: #4CAF50;">
+    <div id="status" aria-live="polite" style="font-size: 22px; color: #4CAF50; margin: 15px 0;">
       Status: Waiting for audio activation...
     </div>
+
+    <h2>🎵 Song Key Guides</h2>
+
+    <section class="song-card">
+      <h3>1. Twinkle Twinkle Little Star</h3>
+      <p>Key Sequence: <span class="keys">A A G G H H G | F F D D S S A</span></p>
+    </section>
+
+    <section class="song-card">
+      <h3>2. Old MacDonald Had a Farm</h3>
+      <p>Key Sequence: <span class="keys">G G G S D D S | J J H H G</span></p>
+    </section>
+
+    <section class="song-card">
+      <h3>3. Für Elise (Opening Theme)</h3>
+      <p>Key Sequence: <span class="keys">E W E W E J L K H | A D H J | D R J K</span></p>
+    </section>
   </main>
 
   <script>
     let audioCtx;
 
+    // Expanded Dictionary mapping QWERTY keys to exact note frequencies & pitch names
     const notes = {
-      'a': { name: 'C4', freq: 261.63 },
-      's': { name: 'D4', freq: 293.66 },
-      'd': { name: 'E4', freq: 329.63 },
-      'f': { name: 'F4', freq: 349.23 },
-      'g': { name: 'G4', freq: 392.00 }
+      'a': { name: 'C4 (Middle C)', freq: 261.63 },
+      's': { name: 'D4',           freq: 293.66 },
+      'd': { name: 'E4',           freq: 329.63 },
+      'f': { name: 'F4',           freq: 349.23 },
+      'g': { name: 'G4',           freq: 392.00 },
+      'r': { name: 'G Sharp 4',    freq: 415.30 },
+      'h': { name: 'A4',           freq: 440.00 },
+      'j': { name: 'B4',           freq: 493.88 },
+      'k': { name: 'C5',           freq: 523.25 },
+      'l': { name: 'D5',           freq: 587.33 },
+      'w': { name: 'D Sharp 5',    freq: 622.25 },
+      'e': { name: 'E5',           freq: 659.25 }
     };
 
-    // Unlock Audio Context on button click (fixes browser locking)
+    // Initialize Audio
     document.getElementById('startBtn').addEventListener('click', () => {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -57,28 +100,34 @@
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-      document.getElementById('status').innerText = 'Audio Ready! Press A, S, D, F, or G.';
+      document.getElementById('status').innerText = 'Audio Active! Keyboard Ready.';
     });
 
+    // Synthesize Piano Pitch
     function playTone(freq) {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
+      
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      
       osc.connect(gain);
       gain.connect(audioCtx.destination);
+      
       osc.start();
-      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
-      osc.stop(audioCtx.currentTime + 1);
+      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.2);
+      osc.stop(audioCtx.currentTime + 1.2);
     }
 
+    // Voice Announcement
     function speakNote(noteName) {
       const speech = new SpeechSynthesisUtterance(noteName);
-      window.speechSynthesis.cancel();
+      window.speechSynthesis.cancel(); // Clears previous speech for fast key presses
       window.speechSynthesis.speak(speech);
     }
 
+    // Event Listener for Key Presses
     window.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase();
       if (notes[key]) {
