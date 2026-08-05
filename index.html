@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessible Audio Piano</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #121212;
+      color: #ffffff;
+      padding-top: 50px;
+    }
+    .box {
+      border: 2px solid #ffffff;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="box">
+    <h1>Accessible Audio Piano</h1>
+    <p>Click "Start Audio", then press <strong>A, S, D, F, G</strong> to play.</p>
+    
+    <button id="startBtn">1. Click Here First to Start Audio</button>
+    
+    <div id="status" aria-live="polite" style="font-size: 22px; color: #4CAF50;">
+      Status: Waiting for audio activation...
+    </div>
+  </main>
+
+  <script>
+    let audioCtx;
+
+    const notes = {
+      'a': { name: 'C4', freq: 261.63 },
+      's': { name: 'D4', freq: 293.66 },
+      'd': { name: 'E4', freq: 329.63 },
+      'f': { name: 'F4', freq: 349.23 },
+      'g': { name: 'G4', freq: 392.00 }
+    };
+
+    // Unlock Audio Context on button click (fixes browser locking)
+    document.getElementById('startBtn').addEventListener('click', () => {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      document.getElementById('status').innerText = 'Audio Ready! Press A, S, D, F, or G.';
+    });
+
+    function playTone(freq) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1);
+      osc.stop(audioCtx.currentTime + 1);
+    }
+
+    function speakNote(noteName) {
+      const speech = new SpeechSynthesisUtterance(noteName);
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(speech);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const key = e.key.toLowerCase();
+      if (notes[key]) {
+        playTone(notes[key].freq);
+        speakNote(notes[key].name);
+        document.getElementById('status').innerText = `Played Note: ${notes[key].name}`;
+      }
+    });
+  </script>
+</body>
+</html>
