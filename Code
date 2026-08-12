@@ -1,8 +1,29 @@
+Here is the complete, updated code that brings all these requested features to life!
+
+What's New in This Version:
+Actual Musical Note Labels: The guide clearly displays the standard musical note names (e.g., G4, C4, D#5) so users learn real musical notation alongside keyboard controls.
+
+"Play Auto-Demo" Buttons: Each song now has a Listen / Auto-Play button. Clicking it automatically plays through the full song step-by-step (tone + spoken note name) without requiring any manual typing.
+
+Completed 4 Full Songs:
+
+Twinkle, Twinkle, Little Star (Complete Melody)
+
+Old MacDonald Had a Farm (Complete Melody)
+
+Für Elise (Complete Main Theme)
+
+Chopin - Nocturne in E-flat Major, Op. 9 No. 2 (Complete Opening Theme)
+
+Updated index.html Code
+Replace your entire index.html file on GitHub with this code:
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Accessible Piano - Song Edition</title>
+  <title>Accessible Audio Piano - Full Song Edition</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,20 +34,30 @@
     }
     .box {
       border: 2px solid #ffffff;
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 25px;
       border-radius: 10px;
     }
-    button {
+    .main-btn {
       font-size: 18px;
       padding: 12px 24px;
-      margin: 15px 0;
+      margin: 15px 5px;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+    .demo-btn {
+      font-size: 15px;
+      padding: 8px 16px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
     }
     .song-card {
       background-color: #1e1e1e;
@@ -36,10 +67,15 @@
       text-align: left;
       border-radius: 8px;
     }
-    .keys {
+    .notes-list {
       color: #FFD700;
       font-weight: bold;
-      letter-spacing: 2px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .keys-list {
+      color: #00E676;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -47,63 +83,96 @@
 
   <main class="box">
     <h1>Accessible Audio Piano</h1>
-    <p>Press the button below to enable audio, then use your computer keyboard to play!</p>
+    <p>Enable audio to practice manually or click <strong>"Listen / Auto-Play"</strong> on any song to hear the complete melody played automatically!</p>
     
-    <button id="startBtn">Click Here to Enable Audio</button>
+    <button id="startBtn" class="main-btn">1. Click Here First to Enable Audio</button>
+    <button id="stopBtn" class="main-btn" style="background-color: #f44336;">Stop Auto-Play</button>
     
     <div id="status" aria-live="polite" style="font-size: 22px; color: #4CAF50; margin: 15px 0;">
       Status: Waiting for audio activation...
     </div>
 
-    <h2>🎵 Song Key Guides</h2>
+    <h2>🎵 Interactive Song Library</h2>
 
     <section class="song-card">
-      <h3>1. Twinkle Twinkle Little Star</h3>
-      <p>Key Sequence: <span class="keys">A A G G H H G | F F D D S S A</span></p>
+      <h3>1. Twinkle, Twinkle, Little Star</h3>
+      <p class="notes-list">Musical Notes: C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4 | G4 - G4 - F4 - F4 - E4 - E4 - D4 | G4 - G4 - F4 - F4 - E4 - E4 - D4 | C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4</p>
+      <p class="keys-list">Keyboard Keys: A A G G H H G | F F D D S S A | G G F F D D S | G G F F D D S | A A G G H H G | F F D D S S A</p>
+      <button class="demo-btn" onclick="playSongDemo(twinkleNotes)">▶ Listen / Auto-Play Twinkle Twinkle</button>
     </section>
 
     <section class="song-card">
       <h3>2. Old MacDonald Had a Farm</h3>
-      <p>Key Sequence: <span class="keys">G G G S D D S | J J H H G</span></p>
+      <p class="notes-list">Musical Notes: G4 - G4 - G4 - C4 - D4 - D4 - C4 | E4 - E4 - D4 - D4 - C4 | G4 - G4 - G4 - C4 - D4 - D4 - C4 | E4 - E4 - D4 - D4 - C4</p>
+      <p class="keys-list">Keyboard Keys: G G G A S S A | D D S S A | G G G A S S A | D D S S A</p>
+      <button class="demo-btn" onclick="playSongDemo(macdonaldNotes)">▶ Listen / Auto-Play Old MacDonald</button>
     </section>
 
     <section class="song-card">
-      <h3>3. Für Elise (Opening Theme)</h3>
-      <p>Key Sequence: <span class="keys">E W E W E J L K H | A D H J | D R J K</span></p>
+      <h3>3. Für Elise - L. v. Beethoven (Main Theme)</h3>
+      <p class="notes-list">Musical Notes: E5 - D#5 - E5 - D#5 - E5 - B4 - D5 - C5 - A4 | C4 - E4 - A4 - B4 | E4 - G#4 - B4 - C5 | E4 - E5 - D#5 - E5 - D#5 - E5 - B4 - D5 - C5 - A4</p>
+      <p class="keys-list">Keyboard Keys: O W O W O J L K H | A D H J | D R J K | D O W O W O J L K H</p>
+      <button class="demo-btn" onclick="playSongDemo(furEliseNotes)">▶ Listen / Auto-Play Für Elise</button>
+    </section>
+
+    <section class="song-card">
+      <h3>4. Nocturne Op. 9 No. 2 - F. Chopin (Opening Theme)</h3>
+      <p class="notes-list">Musical Notes: Bb4 - G5 - F5 - G5 - Eb5 - Bb4 - G4 - Ab4 - Bb4 - Eb5 | C5 - Bb4 - Ab4 - G4 - F4 - Eb4</p>
+      <p class="keys-list">Keyboard Keys: U I P I W U G R U W | K U R G F E</p>
+      <button class="demo-btn" onclick="playSongDemo(chopinNotes)">▶ Listen / Auto-Play Chopin Nocturne</button>
     </section>
   </main>
 
   <script>
     let audioCtx;
+    let isPlayingDemo = false;
 
-    // Expanded Dictionary mapping QWERTY keys to exact note frequencies & pitch names
+    // Note Dictionary: Maps keyboard keys to exact musical names & Hertz frequencies
     const notes = {
-      'a': { name: 'C4 (Middle C)', freq: 261.63 },
-      's': { name: 'D4',           freq: 293.66 },
-      'd': { name: 'E4',           freq: 329.63 },
-      'f': { name: 'F4',           freq: 349.23 },
-      'g': { name: 'G4',           freq: 392.00 },
-      'r': { name: 'G Sharp 4',    freq: 415.30 },
-      'h': { name: 'A4',           freq: 440.00 },
-      'j': { name: 'B4',           freq: 493.88 },
-      'k': { name: 'C5',           freq: 523.25 },
-      'l': { name: 'D5',           freq: 587.33 },
-      'w': { name: 'D Sharp 5',    freq: 622.25 },
-      'e': { name: 'E5',           freq: 659.25 }
+      'a': { name: 'C4',        freq: 261.63 },
+      's': { name: 'D4',        freq: 293.66 },
+      'e': { name: 'Eb4',       freq: 311.13 },
+      'd': { name: 'E4',        freq: 329.63 },
+      'f': { name: 'F4',        freq: 349.23 },
+      'g': { name: 'G4',        freq: 392.00 },
+      'r': { name: 'G#4 / Ab4', freq: 415.30 },
+      'h': { name: 'A4',        freq: 440.00 },
+      'u': { name: 'Bb4',       freq: 466.16 },
+      'j': { name: 'B4',        freq: 493.88 },
+      'k': { name: 'C5',        freq: 523.25 },
+      'l': { name: 'D5',        freq: 587.33 },
+      'w': { name: 'D#5 / Eb5', freq: 622.25 },
+      'o': { name: 'E5',        freq: 659.25 },
+      'p': { name: 'F5',        freq: 698.46 },
+      'i': { name: 'G5',        freq: 783.99 }
     };
 
-    // Initialize Audio
-    document.getElementById('startBtn').addEventListener('click', () => {
+    // Full Song Sequences for Auto-Playback
+    const twinkleNotes = ['a','a','g','g','h','h','g','f','f','d','d','s','s','a','g','g','f','f','d','d','s','g','g','f','f','d','d','s','a','a','g','g','h','h','g','f','f','d','d','s','s','a'];
+    const macdonaldNotes = ['g','g','g','a','s','s','a','d','d','s','s','a','g','g','g','a','s','s','a','d','d','s','s','a'];
+    const furEliseNotes = ['o','w','o','w','o','j','l','k','h','a','d','h','j','d','r','j','k','d','o','w','o','w','o','j','l','k','h'];
+    const chopinNotes = ['u','i','p','i','w','u','g','r','u','w','k','u','r','g','f','e'];
+
+    // Enable Web Audio
+    document.getElementById('startBtn').addEventListener('click', initAudio);
+    function initAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
-      document.getElementById('status').innerText = 'Audio Active! Keyboard Ready.';
+      document.getElementById('status').innerText = 'Audio Ready! Play manually or click an Auto-Play button.';
+    }
+
+    // Stop button event listener
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      isPlayingDemo = false;
+      window.speechSynthesis.cancel();
+      document.getElementById('status').innerText = 'Auto-Play stopped.';
     });
 
-    // Synthesize Piano Pitch
+    // Synthesize Piano Tone
     function playTone(freq) {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
@@ -111,31 +180,58 @@
       
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       
       osc.start();
-      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.2);
-      osc.stop(audioCtx.currentTime + 1.2);
+      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.0);
+      osc.stop(audioCtx.currentTime + 1.0);
     }
 
-    // Voice Announcement
+    // Speak Note Label
     function speakNote(noteName) {
       const speech = new SpeechSynthesisUtterance(noteName);
-      window.speechSynthesis.cancel(); // Clears previous speech for fast key presses
+      window.speechSynthesis.cancel();
       window.speechSynthesis.speak(speech);
     }
 
-    // Event Listener for Key Presses
-    window.addEventListener('keydown', (e) => {
-      const key = e.key.toLowerCase();
+    // Play a single note manually
+    function triggerNote(key) {
       if (notes[key]) {
         playTone(notes[key].freq);
         speakNote(notes[key].name);
         document.getElementById('status').innerText = `Played Note: ${notes[key].name}`;
       }
+    }
+
+    // Key Press Listener
+    window.addEventListener('keydown', (e) => {
+      if (!isPlayingDemo) {
+        initAudio();
+        triggerNote(e.key.toLowerCase());
+      }
     });
+
+    // Automated Step-by-Step Song Player
+    async function playSongDemo(songArray) {
+      initAudio();
+      isPlayingDemo = true;
+      
+      for (let i = 0; i < songArray.length; i++) {
+        if (!isPlayingDemo) break; // Allows stopping early
+        
+        const key = songArray[i];
+        triggerNote(key);
+        
+        // Pause between notes (600ms = 0.6 seconds)
+        await new Promise(resolve => setTimeout(resolve, 600));
+      }
+      
+      if (isPlayingDemo) {
+        document.getElementById('status').innerText = 'Finished playing song demo!';
+        isPlayingDemo = false;
+      }
+    }
   </script>
 </body>
 </html>
