@@ -1,29 +1,8 @@
-Here is the complete, updated code that brings all these requested features to life!
-
-What's New in This Version:
-Actual Musical Note Labels: The guide clearly displays the standard musical note names (e.g., G4, C4, D#5) so users learn real musical notation alongside keyboard controls.
-
-"Play Auto-Demo" Buttons: Each song now has a Listen / Auto-Play button. Clicking it automatically plays through the full song step-by-step (tone + spoken note name) without requiring any manual typing.
-
-Completed 4 Full Songs:
-
-Twinkle, Twinkle, Little Star (Complete Melody)
-
-Old MacDonald Had a Farm (Complete Melody)
-
-Für Elise (Complete Main Theme)
-
-Chopin - Nocturne in E-flat Major, Op. 9 No. 2 (Complete Opening Theme)
-
-Updated index.html Code
-Replace your entire index.html file on GitHub with this code:
-
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Accessible Audio Piano - Full Song Edition</title>
+  <title>Accessible Audio Piano - 11 Song Master Collection</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -34,7 +13,7 @@ HTML
     }
     .box {
       border: 2px solid #ffffff;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       padding: 25px;
       border-radius: 10px;
@@ -42,7 +21,7 @@ HTML
     .main-btn {
       font-size: 18px;
       padding: 12px 24px;
-      margin: 15px 5px;
+      margin: 10px 5px;
       background-color: #4CAF50;
       color: white;
       border: none;
@@ -70,7 +49,7 @@ HTML
     .notes-list {
       color: #FFD700;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.6;
     }
     .keys-list {
@@ -96,8 +75,8 @@ HTML
 
     <section class="song-card">
       <h3>1. Twinkle, Twinkle, Little Star</h3>
-      <p class="notes-list">Musical Notes: C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4 | G4 - G4 - F4 - F4 - E4 - E4 - D4 | G4 - G4 - F4 - F4 - E4 - E4 - D4 | C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4</p>
-      <p class="keys-list">Keyboard Keys: A A G G H H G | F F D D S S A | G G F F D D S | G G F F D D S | A A G G H H G | F F D D S S A</p>
+      <p class="notes-list">Musical Notes: C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4 | G4 - G4 - F4 - F4 - E4 - E4 - D4 | C4 - C4 - G4 - G4 - A4 - A4 - G4 | F4 - F4 - E4 - E4 - D4 - D4 - C4</p>
+      <p class="keys-list">Keyboard Keys: A A G G H H G | F F D D S S A | G G F F D D S | A A G G H H G | F F D D S S A</p>
       <button class="demo-btn" onclick="playSongDemo(twinkleNotes)">▶ Listen / Auto-Play Twinkle Twinkle</button>
     </section>
 
@@ -110,8 +89,8 @@ HTML
 
     <section class="song-card">
       <h3>3. Für Elise - L. v. Beethoven (Main Theme)</h3>
-      <p class="notes-list">Musical Notes: E5 - D#5 - E5 - D#5 - E5 - B4 - D5 - C5 - A4 | C4 - E4 - A4 - B4 | E4 - G#4 - B4 - C5 | E4 - E5 - D#5 - E5 - D#5 - E5 - B4 - D5 - C5 - A4</p>
-      <p class="keys-list">Keyboard Keys: O W O W O J L K H | A D H J | D R J K | D O W O W O J L K H</p>
+      <p class="notes-list">Musical Notes: E5 - D#5 - E5 - D#5 - E5 - B4 - D5 - C5 - A4 | C4 - E4 - A4 - B4 | E4 - G#4 - B4 - C5</p>
+      <p class="keys-list">Keyboard Keys: O W O W O J L K H | A D H J | D R J K</p>
       <button class="demo-btn" onclick="playSongDemo(furEliseNotes)">▶ Listen / Auto-Play Für Elise</button>
     </section>
 
@@ -121,37 +100,100 @@ HTML
       <p class="keys-list">Keyboard Keys: U I P I W U G R U W | K U R G F E</p>
       <button class="demo-btn" onclick="playSongDemo(chopinNotes)">▶ Listen / Auto-Play Chopin Nocturne</button>
     </section>
+
+    <section class="song-card">
+      <h3>5. Prelude in C Major - J.S. Bach</h3>
+      <p class="notes-list">Musical Notes: C4 - E4 - G4 - C5 - E5 | C4 - E4 - G4 - C5 - E5 | C4 - D4 - A4 - D5 - F5 | C4 - D4 - A4 - D5 - F5</p>
+      <p class="keys-list">Keyboard Keys: A D G K O | A D G K O | A S H L P | A S H L P</p>
+      <button class="demo-btn" onclick="playSongDemo(bachNotes)">▶ Listen / Auto-Play Prelude in C</button>
+    </section>
+
+    <section class="song-card">
+      <h3>6. Turkish March - W.A. Mozart</h3>
+      <p class="notes-list">Musical Notes: B4 - A4 - G#4 - A4 - C5 | D5 - C5 - B4 - C5 - E5 | F5 - E5 - D#5 - E5 - B5</p>
+      <p class="keys-list">Keyboard Keys: J H R H K | L K J K O | P O W O B</p>
+      <button class="demo-btn" onclick="playSongDemo(mozartNotes)">▶ Listen / Auto-Play Turkish March</button>
+    </section>
+
+    <section class="song-card">
+      <h3>7. The Entertainer - Scott Joplin</h3>
+      <p class="notes-list">Musical Notes: D4 - D#4 - E4 - C5 - E4 - C5 - E4 - C5 | D4 - D#4 - E4 - C5 - E4 - C5 - E4 - C5</p>
+      <p class="keys-list">Keyboard Keys: S E D K D K D K | S E D K D K D K</p>
+      <button class="demo-btn" onclick="playSongDemo(entertainerNotes)">▶ Listen / Auto-Play The Entertainer</button>
+    </section>
+
+    <section class="song-card">
+      <h3>8. Moonlight Sonata - L. v. Beethoven</h3>
+      <p class="notes-list">Musical Notes: G#4 - C#5 - E5 | G#4 - C#5 - E5 | G#4 - C#5 - E5 | A4 - C#5 - E5 | A4 - D5 - F5</p>
+      <p class="keys-list">Keyboard Keys: R Y O | R Y O | R Y O | H Y O | H L P</p>
+      <button class="demo-btn" onclick="playSongDemo(moonlightNotes)">▶ Listen / Auto-Play Moonlight Sonata</button>
+    </section>
+
+    <section class="song-card">
+      <h3>9. Clair de Lune - Claude Debussy</h3>
+      <p class="notes-list">Musical Notes: F5 - D#5 - C#5 - C5 | Bb4 - G#4 - D#4 - F4</p>
+      <p class="keys-list">Keyboard Keys: P W Y K | U R E F</p>
+      <button class="demo-btn" onclick="playSongDemo(debussyNotes)">▶ Listen / Auto-Play Clair de Lune</button>
+    </section>
+
+    <section class="song-card">
+      <h3>10. River Flows in You - Yiruma</h3>
+      <p class="notes-list">Musical Notes: A4 - G#4 - A4 - G#4 - A4 - E5 - A4 - C#5 - B4 | A4 - G#4 - A4 - G#4 - A4 - E5 - A4 - C#5 - B4</p>
+      <p class="keys-list">Keyboard Keys: H R H R H O H Y J | H R H R H O H Y J</p>
+      <button class="demo-btn" onclick="playSongDemo(yirumaNotes)">▶ Listen / Auto-Play River Flows in You</button>
+    </section>
+
+    <section class="song-card">
+      <h3>11. Mia & Sebastian's Theme (La La Land)</h3>
+      <p class="notes-list">Musical Notes: F#4 - B4 - C#5 - D5 | F#5 - E5 - D5 - C#5 - B4 | F#4 - B4 - C#5 - D5 | F#5 - E5 - D5 - C#5 - B4</p>
+      <p class="keys-list">Keyboard Keys: T J Y L | X O L Y J | T J Y L | X O L Y J</p>
+      <button class="demo-btn" onclick="playSongDemo(lalandNotes)">▶ Listen / Auto-Play Mia & Sebastian's Theme</button>
+    </section>
   </main>
 
   <script>
     let audioCtx;
     let isPlayingDemo = false;
 
-    // Note Dictionary: Maps keyboard keys to exact musical names & Hertz frequencies
+    // Full Dictionary mapping keyboard keys to exact musical names & frequencies
     const notes = {
       'a': { name: 'C4',        freq: 261.63 },
+      'q': { name: 'C#4 / Db4', freq: 277.18 },
       's': { name: 'D4',        freq: 293.66 },
-      'e': { name: 'Eb4',       freq: 311.13 },
+      'e': { name: 'Eb4 / D#4', freq: 311.13 },
       'd': { name: 'E4',        freq: 329.63 },
       'f': { name: 'F4',        freq: 349.23 },
+      't': { name: 'F#4 / Gb4', freq: 369.99 },
       'g': { name: 'G4',        freq: 392.00 },
       'r': { name: 'G#4 / Ab4', freq: 415.30 },
       'h': { name: 'A4',        freq: 440.00 },
-      'u': { name: 'Bb4',       freq: 466.16 },
+      'u': { name: 'Bb4 / A#4', freq: 466.16 },
       'j': { name: 'B4',        freq: 493.88 },
       'k': { name: 'C5',        freq: 523.25 },
+      'y': { name: 'C#5 / Db5', freq: 554.37 },
       'l': { name: 'D5',        freq: 587.33 },
       'w': { name: 'D#5 / Eb5', freq: 622.25 },
       'o': { name: 'E5',        freq: 659.25 },
       'p': { name: 'F5',        freq: 698.46 },
-      'i': { name: 'G5',        freq: 783.99 }
+      'x': { name: 'F#5 / Gb5', freq: 739.99 },
+      'i': { name: 'G5',        freq: 783.99 },
+      'z': { name: 'G#5 / Ab5', freq: 830.61 },
+      'v': { name: 'A5',        freq: 880.00 },
+      'b': { name: 'B5',        freq: 987.77 }
     };
 
     // Full Song Sequences for Auto-Playback
-    const twinkleNotes = ['a','a','g','g','h','h','g','f','f','d','d','s','s','a','g','g','f','f','d','d','s','g','g','f','f','d','d','s','a','a','g','g','h','h','g','f','f','d','d','s','s','a'];
+    const twinkleNotes = ['a','a','g','g','h','h','g','f','f','d','d','s','s','a','g','g','f','f','d','d','s','a','a','g','g','h','h','g','f','f','d','d','s','s','a'];
     const macdonaldNotes = ['g','g','g','a','s','s','a','d','d','s','s','a','g','g','g','a','s','s','a','d','d','s','s','a'];
-    const furEliseNotes = ['o','w','o','w','o','j','l','k','h','a','d','h','j','d','r','j','k','d','o','w','o','w','o','j','l','k','h'];
+    const furEliseNotes = ['o','w','o','w','o','j','l','k','h','a','d','h','j','d','r','j','k'];
     const chopinNotes = ['u','i','p','i','w','u','g','r','u','w','k','u','r','g','f','e'];
+    const bachNotes = ['a','d','g','k','o','a','d','g','k','o','a','s','h','l','p','a','s','h','l','p'];
+    const mozartNotes = ['j','h','r','h','k','l','k','j','k','o','p','o','w','o','b'];
+    const entertainerNotes = ['s','e','d','k','d','k','d','k','s','e','d','k','d','k','d','k'];
+    const moonlightNotes = ['r','y','o','r','y','o','r','y','o','h','y','o','h','l','p'];
+    const debussyNotes = ['p','w','y','k','u','r','e','f'];
+    const yirumaNotes = ['h','r','h','r','h','o','h','y','j','h','r','h','r','h','o','h','y','j'];
+    const lalandNotes = ['t','j','y','l','x','o','l','y','j','t','j','y','l','x','o','l','y','j'];
 
     // Enable Web Audio
     document.getElementById('startBtn').addEventListener('click', initAudio);
@@ -165,14 +207,14 @@ HTML
       document.getElementById('status').innerText = 'Audio Ready! Play manually or click an Auto-Play button.';
     }
 
-    // Stop button event listener
+    // Stop Button
     document.getElementById('stopBtn').addEventListener('click', () => {
       isPlayingDemo = false;
       window.speechSynthesis.cancel();
       document.getElementById('status').innerText = 'Auto-Play stopped.';
     });
 
-    // Synthesize Piano Tone
+    // Tone Generator
     function playTone(freq) {
       if (!audioCtx) return;
       const osc = audioCtx.createOscillator();
@@ -188,14 +230,14 @@ HTML
       osc.stop(audioCtx.currentTime + 1.0);
     }
 
-    // Speak Note Label
+    // Voice Announcement
     function speakNote(noteName) {
       const speech = new SpeechSynthesisUtterance(noteName);
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(speech);
     }
 
-    // Play a single note manually
+    // Trigger Single Note
     function triggerNote(key) {
       if (notes[key]) {
         playTone(notes[key].freq);
@@ -212,18 +254,17 @@ HTML
       }
     });
 
-    // Automated Step-by-Step Song Player
+    // Auto-Play Function
     async function playSongDemo(songArray) {
       initAudio();
       isPlayingDemo = true;
       
       for (let i = 0; i < songArray.length; i++) {
-        if (!isPlayingDemo) break; // Allows stopping early
+        if (!isPlayingDemo) break;
         
         const key = songArray[i];
         triggerNote(key);
         
-        // Pause between notes (600ms = 0.6 seconds)
         await new Promise(resolve => setTimeout(resolve, 600));
       }
       
@@ -233,5 +274,7 @@ HTML
       }
     }
   </script>
+</body>
+</html>
 </body>
 </html>
